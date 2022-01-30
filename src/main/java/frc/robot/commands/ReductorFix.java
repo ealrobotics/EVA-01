@@ -5,13 +5,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Drivetrain;
 
 public class ReductorFix extends CommandBase {
-  private final Drive drive;
+  private final Drivetrain drive;
 
   /** Creates a new ReductorFix. */
-  public ReductorFix(Drive robotDrive) {
+  public ReductorFix(Drivetrain robotDrive) {
     drive = robotDrive;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drive);

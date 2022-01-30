@@ -5,12 +5,13 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CANIDConstants;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-public class Drive extends SubsystemBase {
+public class Drivetrain extends SubsystemBase {
   // Drivebase motors' variables
   private CANSparkMax leftLeadMotor;
   private CANSparkMax leftFollowMotor;
@@ -21,7 +22,7 @@ public class Drive extends SubsystemBase {
   private final DifferentialDrive drive;
 
   /** Creates a new Drive. */
-  public Drive() {
+  public Drivetrain() {
     // Drivebase motors
     leftLeadMotor = new CANSparkMax(CANIDConstants.drivebaseLeftLeadMotorID, MotorType.kBrushed);
     leftFollowMotor = new CANSparkMax(CANIDConstants.drivebaseLeftFollowMotorID, MotorType.kBrushed);
@@ -53,6 +54,26 @@ public class Drive extends SubsystemBase {
   }
 
   /**
+   * Drives the robot using arcade controls.
+   *
+   * @param lft the commanded forward movement
+   * @param rgt the commanded rotation
+   */
+  public void tankDrive(double lft, double rgt) {
+    drive.tankDrive(lft, rgt);
+
+    SmartDashboard.putNumber("Left Side Voltage", leftLeadMotor.getBusVoltage());
+    SmartDashboard.putNumber("Left Side Lead Motor Temp", leftLeadMotor.getMotorTemperature());
+    SmartDashboard.putNumber("Left Side Follow Motor Temp", leftFollowMotor.getMotorTemperature());
+    SmartDashboard.putNumber("Left Side Output", leftLeadMotor.getAppliedOutput());
+
+    SmartDashboard.putNumber("Right Side Voltage", rightLeadMotor.getBusVoltage());
+    SmartDashboard.putNumber("Right Side Lead Motor Temp", rightLeadMotor.getMotorTemperature());
+    SmartDashboard.putNumber("Right Side Follow Motor Temp", rightFollowMotor.getMotorTemperature());
+    SmartDashboard.putNumber("Right Side Output", rightLeadMotor.getAppliedOutput());
+  }
+
+  /**
    * Sets the max output of the drive. Useful for scaling the drive to drive more
    * slowly.
    *
@@ -60,15 +81,5 @@ public class Drive extends SubsystemBase {
    */
   public void setMaxOutput(double maxOutput) {
     drive.setMaxOutput(maxOutput);
-  }
-
-  // Set max output power to .5
-  public void setMaxOutputToHalf() {
-    drive.setMaxOutput(0.5);
-  }
-
-  // Set max output power to 1
-  public void setMaxOutputToMax() {
-    drive.setMaxOutput(1);
   }
 }
