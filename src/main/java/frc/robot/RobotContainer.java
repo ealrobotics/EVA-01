@@ -12,8 +12,7 @@ import frc.robot.commands.DefaultDrive;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+//import edu.wpi.first.wpilibj2.command.RunCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -28,7 +27,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
 
-  private final ReductorFix reductorFix = new ReductorFix(drive);
+  // private final ReductorFix reductorFix = new ReductorFix(drive);
 
   // XboxController on port 1
   XboxController driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -41,14 +40,16 @@ public class RobotContainer {
     configureButtonBindings();
 
     // Configure default commands
-    // Set the default drive command to split-stick arcade drive
-    drive.setDefaultCommand(
-        // A split-stick arcade command, with forward/backward controlled by the left
-        // hand, and turning controlled by the right.
-        new RunCommand(
-            () -> drive.arcadeDrive(
-                -driverController.getLeftY(), driverController.getRightX()),
-            drive));
+    // Set the drive mode to arcade drive
+    /*
+     * m_drivetrain.setDefaultCommand(new RunCommand(
+     * () -> m_drivetrain.arcadeDrive(-driverController.getRightX(),
+     * -driverController.getLeftY()), m_drivetrain));
+     */
+
+    m_drivetrain.setDefaultCommand(
+        new DefaultDrive(m_drivetrain, () -> -driverController.getRightX(), () -> -driverController.getLeftY(),
+            driverController::getXButton));
   }
 
   /**
@@ -60,13 +61,6 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // Set drivetrain speed to half
-    new JoystickButton(driverController, XboxController.Button.kA.value)
-        .whenPressed(new InstantCommand(drive::setMaxOutputToHalf, drive));
-
-    // Set drivetrain speed to max
-    new JoystickButton(driverController, XboxController.Button.kB.value)
-        .whenPressed(new InstantCommand(drive::setMaxOutputToMax, drive));
   }
 
   /**
@@ -76,6 +70,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return reductorFix;
+    return new InstantCommand();
   }
 }
