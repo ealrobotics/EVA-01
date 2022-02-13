@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import java.util.function.BooleanSupplier;
+//import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -27,8 +28,7 @@ public class DefaultDrive extends CommandBase {
 
   @Override
   public void execute() {
-    double forwardPower = m_forwardPower.getAsDouble();
-    forwardPower *= (m_boost.getAsBoolean() ? 1.0 : 0.7);
-    m_drivetrain.arcadeDrive(forwardPower, m_turnPower.getAsDouble());
+    m_drivetrain.setMaxOutput(m_boost.getAsBoolean() ? 0.5 : 1);
+    m_drivetrain.arcadeDrive(m_forwardPower.getAsDouble(), m_turnPower.getAsDouble());
   }
 }
