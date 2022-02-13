@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.OIConstants;
@@ -50,6 +51,9 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand(
         new DefaultDrive(m_drivetrain, () -> -driverController.getRightX(), () -> -driverController.getLeftY(),
             driverController::getXButton));
+
+    // Camera
+    CameraServer.startAutomaticCapture();
   }
 
   /**
