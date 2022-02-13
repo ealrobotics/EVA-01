@@ -5,7 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CANIDConstants;
 import com.revrobotics.CANSparkMax;
@@ -51,6 +51,25 @@ public class Drivetrain extends SubsystemBase {
    */
   public void arcadeDrive(double fwd, double rot) {
     drive.arcadeDrive(fwd, rot);
+
+    /*
+     * SmartDashboard.putNumber("Left Side Voltage", leftLeadMotor.getBusVoltage());
+     * SmartDashboard.putNumber("Left Side Lead Motor Temp",
+     * leftLeadMotor.getMotorTemperature());
+     * SmartDashboard.putNumber("Left Side Follow Motor Temp",
+     * leftFollowMotor.getMotorTemperature());
+     * SmartDashboard.putNumber("Left Side Output",
+     * leftLeadMotor.getAppliedOutput());
+     * 
+     * SmartDashboard.putNumber("Right Side Voltage",
+     * rightLeadMotor.getBusVoltage());
+     * SmartDashboard.putNumber("Right Side Lead Motor Temp",
+     * rightLeadMotor.getMotorTemperature());
+     * SmartDashboard.putNumber("Right Side Follow Motor Temp",
+     * rightFollowMotor.getMotorTemperature());
+     * SmartDashboard.putNumber("Right Side Output",
+     * rightLeadMotor.getAppliedOutput());
+     */
   }
 
   /**
@@ -61,16 +80,6 @@ public class Drivetrain extends SubsystemBase {
    */
   public void tankDrive(double lft, double rgt) {
     drive.tankDrive(lft, rgt);
-
-    SmartDashboard.putNumber("Left Side Voltage", leftLeadMotor.getBusVoltage());
-    SmartDashboard.putNumber("Left Side Lead Motor Temp", leftLeadMotor.getMotorTemperature());
-    SmartDashboard.putNumber("Left Side Follow Motor Temp", leftFollowMotor.getMotorTemperature());
-    SmartDashboard.putNumber("Left Side Output", leftLeadMotor.getAppliedOutput());
-
-    SmartDashboard.putNumber("Right Side Voltage", rightLeadMotor.getBusVoltage());
-    SmartDashboard.putNumber("Right Side Lead Motor Temp", rightLeadMotor.getMotorTemperature());
-    SmartDashboard.putNumber("Right Side Follow Motor Temp", rightFollowMotor.getMotorTemperature());
-    SmartDashboard.putNumber("Right Side Output", rightLeadMotor.getAppliedOutput());
   }
 
   /**
