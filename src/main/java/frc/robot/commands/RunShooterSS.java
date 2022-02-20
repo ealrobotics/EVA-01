@@ -10,26 +10,26 @@ import frc.robot.subsystems.ShooterSS;
 
 public class RunShooterSS extends CommandBase {
 
-  private final ShooterSS shooterState;
+  private final ShooterSS m_shooterSS;
 
-  NetworkTableEntry bottomShooterSpeed;
+  NetworkTableEntry m_bottomShooterSpeed;
 
   /** Creates a new RunShooterState. */
   public RunShooterSS(ShooterSS shooterState, NetworkTableEntry bottomShooterSpeed) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.shooterState = shooterState;
+    m_shooterSS = shooterState;
     addRequirements(shooterState);
-    this.bottomShooterSpeed = bottomShooterSpeed;
+    m_bottomShooterSpeed = bottomShooterSpeed;
   }
 
   @Override
   public void execute() {
-    shooterState.run(this.bottomShooterSpeed.getDouble(0));
+    m_shooterSS.run(m_bottomShooterSpeed.getDouble(0));
   }
 
   @Override
   public void end(boolean interrupted) {
-    shooterState.run(0.0);
+    m_shooterSS.run(0.0);
   }
 
   // Returns true when the command should end.

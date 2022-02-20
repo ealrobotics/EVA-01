@@ -49,7 +49,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     private final Drivetrain m_drivetrain = new Drivetrain();
-    private final ShooterSS shooterState = new ShooterSS();
+    private final ShooterSS m_shooterSS = new ShooterSS();
 
     // XboxController on port 1
     XboxController driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -88,7 +88,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         new JoystickButton(driverController, Button.kA.value)
-                .whileHeld(new RunShooterSS(shooterState, bottomShooterSpeed));
+                .whileHeld(new RunShooterSS(m_shooterSS, bottomShooterSpeed));
     }
 
     /**
