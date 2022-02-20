@@ -18,8 +18,9 @@ public final class Constants {
         public static final int drivebaseLeftFollowMotorID = 12;
         public static final int drivebaseRightLeadMotorID = 13;
         public static final int drivebaseRightFollowMotorID = 14;
-        public static final int shooterBottomMotorID = 21;
-        public static final int shooterTopMotorID = 22;
+        public static final int intakeMotorID = 21;
+        public static final int shooterBottomMotorID = 31;
+        public static final int shooterTopMotorID = 32;
     }
 
     public static final class DrivetrainConstants {
@@ -53,6 +54,11 @@ public final class Constants {
 
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
+    }
+
+    public static final class IntakeConstants {
+        public static final boolean motorInverted = false;
+
     }
 
     public static final class ShooterConstants {
