@@ -28,8 +28,10 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DrivetrainConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.DefaultDrive;
+import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunShooterSS;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.ShooterSS;
 import edu.wpi.first.wpilibj2.command.Command;
 //import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -50,6 +52,7 @@ public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     private final Drivetrain m_drivetrain = new Drivetrain();
     private final ShooterSS m_shooterSS = new ShooterSS();
+    private final Intake m_intake = new Intake();
 
     // XboxController on port 1
     XboxController driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -89,6 +92,12 @@ public class RobotContainer {
     private void configureButtonBindings() {
         new JoystickButton(driverController, Button.kA.value)
                 .whileHeld(new RunShooterSS(m_shooterSS, bottomShooterSpeed));
+
+        new JoystickButton(driverController, Button.kB.value)
+                .whileHeld(new RunIntake(m_intake, 0.5));
+
+        new JoystickButton(driverController, Button.kX.value)
+                        .whileHeld(new RunIntake(m_intake, 0.5));
     }
 
     /**
