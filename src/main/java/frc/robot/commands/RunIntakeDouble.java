@@ -5,30 +5,27 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Intake;
 
-public class ReductorFix extends CommandBase {
-  private final Drivetrain drive;
+public class RunIntakeDouble extends CommandBase {
+  private final Intake m_intake;
+  private final Double m_power;
 
-  public ReductorFix(Drivetrain robotDrive) {
-    drive = robotDrive;
+  public RunIntakeDouble(Intake intake, Double power) {
+    m_intake = intake;
+    m_power = power;
 
-    addRequirements(drive);
-  }
-
-  @Override
-  public void initialize() {
-    drive.arcadeDrive(-0.5, 0);
+    addRequirements(intake);
   }
 
   @Override
   public void execute() {
-    drive.arcadeDrive(-0.5, 0);
+    m_intake.run(m_power);
   }
 
   @Override
   public void end(boolean interrupted) {
-    drive.arcadeDrive(0, 0);
+    m_intake.run(0.0);
   }
 
   // Returns true when the command should end.

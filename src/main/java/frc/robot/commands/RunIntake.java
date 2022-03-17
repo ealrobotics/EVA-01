@@ -4,14 +4,15 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 
 public class RunIntake extends CommandBase {
   private final Intake m_intake;
-  private final Double m_power;
+  private final NetworkTableEntry m_power;
 
-  public RunIntake(Intake intake, Double power) {
+  public RunIntake(Intake intake, NetworkTableEntry power) {
     m_intake = intake;
     m_power = power;
 
@@ -20,10 +21,9 @@ public class RunIntake extends CommandBase {
 
   @Override
   public void execute() {
-    m_intake.run(m_power);
+    m_intake.run(m_power.getDouble(0));
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_intake.run(0.0);

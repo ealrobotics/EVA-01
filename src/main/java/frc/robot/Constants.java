@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import com.revrobotics.SparkMaxAlternateEncoder;
-
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 
 public final class Constants {
@@ -14,13 +12,13 @@ public final class Constants {
     }
 
     public static final class CANIDConstants {
-        public static final int drivebaseLeftLeadMotorID = 11;
-        public static final int drivebaseLeftFollowMotorID = 12;
-        public static final int drivebaseRightLeadMotorID = 13;
-        public static final int drivebaseRightFollowMotorID = 14;
-        public static final int intakeMotorID = 21;
-        public static final int shooterBottomMotorID = 31;
-        public static final int shooterTopMotorID = 32;
+        public static final int drivebaseLeftLeadMotorID = 13;
+        public static final int drivebaseLeftFollowMotorID = 14;
+        public static final int drivebaseRightLeadMotorID = 11;
+        public static final int drivebaseRightFollowMotorID = 12;
+        public static final int intakeMotorID = 31;
+        public static final int shooterBottomMotorID = 21;
+        public static final int shooterTopMotorID = 22;
     }
 
     public static final class DrivetrainConstants {
@@ -49,6 +47,9 @@ public final class Constants {
     }
 
     public static final class AutoConstants {
+        public static final double kSeconds = 3;
+        public static final double kPower = 0.3;
+        //
         public static final double kMaxSpeedMetersPerSecond = 3;
         public static final double kMaxAccelerationMetersPerSecondSquared = 3;
 
@@ -62,21 +63,29 @@ public final class Constants {
     }
 
     public static final class ShooterConstants {
-        public static final SparkMaxAlternateEncoder.Type kEncType = SparkMaxAlternateEncoder.Type.kQuadrature;
-        public static final int kCPR = 360;
-
-        // State-space
-        public static final int[] kBottomEncoderPorts = new int[] { 5, 4 };
-        public static final int kBottomEncoderCPR = 360;
+        public static final int[] kBottomEncoderPorts = new int[] { 3, 2 };
+        public static final int kBottomEncoderCPR = 2048;
         public static final double kBottomWheelDiameterMeters = 0.1;
         public static final double kBottomEncoderDistancePerPulse =
                 // Assumes the encoders are directly mounted on the wheel shafts
                 (kBottomWheelDiameterMeters * Math.PI) / (double) kBottomEncoderCPR;
 
         // Volts per (radian per second)
-        public static final double kFlywheelKv = 0.023;
+        public static final double kBottomFlywheelKv = 0.055216;
+        // Volts per (radian per second squared)
+        public static final double kBottomFlywheelKa = 0.39183;
+
+        public static final int[] kTopEncoderPorts = new int[] { 5, 4 };
+        public static final int kTopEncoderCPR = 360;
+        public static final double kTopWheelDiameterMeters = 0.1;
+        public static final double kTopEncoderDistancePerPulse =
+                // Assumes the encoders are directly mounted on the wheel shafts
+                (kBottomWheelDiameterMeters * Math.PI) / (double) kBottomEncoderCPR;
+
+        // Volts per (radian per second)
+        public static final double kTopFlywheelKv = 0.023;
 
         // Volts per (radian per second squared)
-        public static final double kFlywheelKa = 0.001;
+        public static final double kTopFlywheelKa = 0.001;
     }
 }

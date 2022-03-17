@@ -15,7 +15,6 @@ public class Intake extends SubsystemBase {
   // Intake motor
   private WPI_VictorSPX m_motor = new WPI_VictorSPX(CANIDConstants.intakeMotorID);
 
-  /** Creates a new Intake. */
   public Intake() {
     m_motor.setInverted(IntakeConstants.motorInverted);
   }

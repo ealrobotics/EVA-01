@@ -5,32 +5,31 @@
 package frc.robot.commands;
 
 import java.util.function.BooleanSupplier;
-//import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
-//import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
-public class DefaultDrive extends CommandBase {
+public class FilteredDrive extends CommandBase {
   private final Drivetrain m_drivetrain;
   private final DoubleSupplier m_forwardPower, m_turnPower;
-  private final BooleanSupplier m_boost;
-  // private SlewRateLimiter filter = new SlewRateLimiter(0.8);
+  private final BooleanSupplier m_unBoost;
+  private SlewRateLimiter filter = new SlewRateLimiter(0.8);
 
-  public DefaultDrive(Drivetrain drivetrain, DoubleSupplier forwardPower, DoubleSupplier turnPower,
-      BooleanSupplier boost) {
+  public FilteredDrive(Drivetrain drivetrain, DoubleSupplier forwardPower, DoubleSupplier turnPower,
+      BooleanSupplier unBoost) {
     m_drivetrain = drivetrain;
     m_forwardPower = forwardPower;
     m_turnPower = turnPower;
-    m_boost = boost;
+    m_unBoost = unBoost;
 
     addRequirements(drivetrain);
   }
 
   @Override
   public void execute() {
-    m_drivetrain.setMaxOutput(m_boost.getAsBoolean() ? 1.0 : 0.5);
-    m_drivetrain.arcadeDrive(m_forwardPower.getAsDouble(), m_turnPower.getAsDouble());
+    m_drivetrain.setMaxOutput(m_unBoost.getAsBoolean() ? 0.5 : 1.0);
+    m_drivetrain.arcadeDrive(filter.calculate(m_forwardPower.getAsDouble()), m_turnPower.getAsDouble());
   }
 }

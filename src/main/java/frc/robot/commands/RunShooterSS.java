@@ -14,17 +14,16 @@ public class RunShooterSS extends CommandBase {
 
   NetworkTableEntry m_bottomShooterSpeed;
 
-  /** Creates a new RunShooterState. */
   public RunShooterSS(ShooterSS shooterState, NetworkTableEntry bottomShooterSpeed) {
-    // Use addRequirements() here to declare subsystem dependencies.
     m_shooterSS = shooterState;
-    addRequirements(shooterState);
     m_bottomShooterSpeed = bottomShooterSpeed;
+
+    addRequirements(shooterState);
   }
 
   @Override
   public void execute() {
-    m_shooterSS.run(m_bottomShooterSpeed.getDouble(0));
+    m_shooterSS.run(m_bottomShooterSpeed.getDouble(0.0));
   }
 
   @Override
