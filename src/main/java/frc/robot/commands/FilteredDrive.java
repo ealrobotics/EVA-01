@@ -9,15 +9,15 @@ import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class FilteredDrive extends CommandBase {
-  private final Drivetrain m_drivetrain;
+  private final DrivetrainSubsystem m_drivetrain;
   private final DoubleSupplier m_forwardPower, m_turnPower;
   private final BooleanSupplier m_unBoost;
   private SlewRateLimiter filter = new SlewRateLimiter(0.8);
 
-  public FilteredDrive(Drivetrain drivetrain, DoubleSupplier forwardPower, DoubleSupplier turnPower,
+  public FilteredDrive(DrivetrainSubsystem drivetrain, DoubleSupplier forwardPower, DoubleSupplier turnPower,
       BooleanSupplier unBoost) {
     m_drivetrain = drivetrain;
     m_forwardPower = forwardPower;

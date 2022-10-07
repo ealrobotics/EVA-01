@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CANIDConstants;
 import frc.robot.Constants.IntakeConstants;
 
-public class Intake extends SubsystemBase {
+public class IntakeSubsystem extends SubsystemBase {
   // Intake motor
   private WPI_VictorSPX m_motor = new WPI_VictorSPX(CANIDConstants.intakeMotorID);
 
-  public Intake() {
+  public IntakeSubsystem() {
     m_motor.setInverted(IntakeConstants.motorInverted);
   }
 

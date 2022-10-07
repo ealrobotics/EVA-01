@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CANIDConstants;
 
-public class Drivetrain extends SubsystemBase {
+public class DrivetrainSubsystem extends SubsystemBase {
   // Drivebase motors' variables
   private CANSparkMax leftLeadMotor = new CANSparkMax(CANIDConstants.drivebaseLeftLeadMotorID, MotorType.kBrushed);
   private CANSparkMax leftFollowMotor = new CANSparkMax(CANIDConstants.drivebaseLeftFollowMotorID, MotorType.kBrushed);
@@ -23,7 +23,7 @@ public class Drivetrain extends SubsystemBase {
   private final DifferentialDrive drive = new DifferentialDrive(leftLeadMotor, rightLeadMotor);
 
   /** Creates a new DriveSubsystem. */
-  public Drivetrain() {
+  public DrivetrainSubsystem() {
     // Reset motors
     leftLeadMotor.restoreFactoryDefaults();
     leftFollowMotor.restoreFactoryDefaults();

@@ -4,28 +4,33 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.controller.BangBangController;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.CANIDConstants;
 
-public class Shooter extends SubsystemBase {
+public class ShooterSubsystem extends SubsystemBase {
   private final CANSparkMax bottomMotor = new CANSparkMax(CANIDConstants.shooterBottomMotorID, MotorType.kBrushless);
-  private final WPI_VictorSPX topMotor = new WPI_VictorSPX(CANIDConstants.shooterTopMotorID);
+  BangBangController controller = new BangBangController();
+  Encoder encoder = new Encoder(Constants.ShooterConstants.kBottomEncoderPorts[0],
+      Constants.ShooterConstants.kBottomEncoderPorts[1]);
 
   /** Creates a new Shooter. */
-  public Shooter() {
+  public ShooterSubsystem() {
     bottomMotor.restoreFactoryDefaults();
-
     bottomMotor.setInverted(false);
-    topMotor.setInverted(false);
+    bottomMotor.setIdleMode(IdleMode.kCoast);
+
+    encoder.setDistancePerPulse(Constants.ShooterConstants.kBottomEncoderDistancePerPulse);
   }
 
-  public void run(Double bottomMotorPower, Double topMotorPower) {
-    bottomMotor.set(bottomMotorPower);
-    topMotor.set(topMotorPower);
+  public void run(Double setpoint) {
+    bottomMotor.set(controller.calculate(encoder.getRate(), setpoint));
   }
 
   @Override
